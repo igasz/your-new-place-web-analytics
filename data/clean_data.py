@@ -12,6 +12,10 @@ def clean_data(filepath, output_path):
     # Handle missing data (NaN)
     df = df.dropna(subset=['zipcode', 'streetAddress', 'datePostedString'])
     
+    # drop duplicates
+    df = df.drop_duplicates(subset=['id'])
+    print("Removed duplicate listings.")
+
     # Fill missing descriptions and events with default text
     df['description'] = df['description'].fillna('No description')
     df['event'] = df['event'].fillna('Unknown')
@@ -19,7 +23,7 @@ def clean_data(filepath, output_path):
     print("Patched missing values.")
 
     # price anomalies
-    # Remove free or  cheap houses (below $10,000)
+    # Remove free or cheap houses (below $10,000)
     df = df[df['price'] > 10000]
     
     # Date formatting
