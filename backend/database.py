@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, declarative_base
 
 # the same connection
 DB_URL = "oracle+oracledb://yourplace:Password123@localhost:1521/?service_name=FREEPDB1"
@@ -15,3 +15,5 @@ def get_db():
         yield db
     finally:
         db.close()
+
+Base = declarative_base()
